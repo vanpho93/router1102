@@ -8,6 +8,11 @@ const Home = () => <h2>Home component</h2>;
 const Private = () => <h2>Private page</h2>;
 const Public = () => <h2>Public page</h2>;
 
+//const SignIn = () => 
+//api => fetch
+//body-parser -> json()
+//redux => isAuthenticated
+
 const App = () => (
     <HashRouter>
         <div>

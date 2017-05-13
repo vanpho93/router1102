@@ -9558,6 +9558,11 @@ var Public = function Public() {
     );
 };
 
+//const SignIn = () => 
+//api => fetch
+//body-parser -> json()
+//redux => isAuthenticated
+
 var App = function App() {
     return _react2.default.createElement(
         _reactRouterDom.HashRouter,
