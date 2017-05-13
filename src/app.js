@@ -4,8 +4,6 @@ import { HashRouter, Route, Link, Redirect } from 'react-router-dom';
 import check from './api/check';
 import SignIn from './SignIn';
 
-const isAuthenticated = false;
-
 const Home = () => <h2>Home component</h2>;
 const Private = () => <h2>Private page</h2>;
 const Public = () => <h2>Public page</h2>;
@@ -16,14 +14,17 @@ const Public = () => <h2>Public page</h2>;
 //redux => isAuthenticated
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isAuthenticated: false };
+    }
+
     componentDidMount() {
-        check(err => {
-            if (err) return console.log('KHONG THANH CONG');
-            console.log('THANH CONG');
-        });
+        check(err => this.setState({ isAuthenticated: !err }));
     }
 
     render() {
+        const { isAuthenticated } = this.state;
         return (
             <HashRouter>
                 <div>

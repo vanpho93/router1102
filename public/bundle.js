@@ -10979,8 +10979,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var isAuthenticated = false;
-
 var Home = function Home() {
     return _react2.default.createElement(
         'h2',
@@ -11011,23 +11009,29 @@ var Public = function Public() {
 var App = function (_Component) {
     _inherits(App, _Component);
 
-    function App() {
+    function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this.state = { isAuthenticated: false };
+        return _this;
     }
 
     _createClass(App, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this2 = this;
+
             (0, _check2.default)(function (err) {
-                if (err) return console.log('KHONG THANH CONG');
-                console.log('THANH CONG');
+                return _this2.setState({ isAuthenticated: !err });
             });
         }
     }, {
         key: 'render',
         value: function render() {
+            var isAuthenticated = this.state.isAuthenticated;
+
             return _react2.default.createElement(
                 _reactRouterDom.HashRouter,
                 null,
@@ -25607,8 +25611,8 @@ var $ = __webpack_require__(231);
 
 var check = function check(cb) {
     $.get('http://localhost:3000/check', function (text) {
-        if (text === 'DA_DANG_NHAP') return cb();
-        return cb('LOI');
+        if (text === 'DA_DANG_NHAP') return cb(false);
+        return cb(true);
     });
 };
 
