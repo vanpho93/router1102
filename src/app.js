@@ -53,3 +53,13 @@ ReactDOM.render(
 );
 
 //https://reacttraining.com/react-router/
+
+/*
+    email: khoaphamtraining@gmail.com
+
+    chu de: Do an NodeJS khoa 11/02/2017
+    Ghi day du ho ten, ten do an.
+    Upload code len github + link github
+    deploy len heroku
+    1 video ngan.
+*/
