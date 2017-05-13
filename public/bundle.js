@@ -9522,6 +9522,8 @@ module.exports = function(src) {
 "use strict";
 
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(186);
 
 var _react2 = _interopRequireDefault(_react);
@@ -9532,7 +9534,17 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(215);
 
+var _dangNhap = __webpack_require__(229);
+
+var _dangNhap2 = _interopRequireDefault(_dangNhap);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var isAuthenticated = false;
 
@@ -9563,55 +9575,77 @@ var Public = function Public() {
 //body-parser -> json()
 //redux => isAuthenticated
 
-var App = function App() {
-    return _react2.default.createElement(
-        _reactRouterDom.HashRouter,
-        null,
-        _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-                'ul',
+var App = function (_Component) {
+    _inherits(App, _Component);
+
+    function App() {
+        _classCallCheck(this, App);
+
+        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    }
+
+    _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            (0, _dangNhap2.default)('pho', '123asdfad').then(function (isOk) {
+                return console.log(isOk);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactRouterDom.HashRouter,
                 null,
                 _react2.default.createElement(
-                    'li',
+                    'div',
                     null,
                     _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/' },
-                        'Home'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/private' },
-                        'Private'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/public' },
-                        'Public'
-                    )
+                        'ul',
+                        null,
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/private' },
+                                'Private'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/public' },
+                                'Public'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: Home }),
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/public', component: Public }),
+                    _react2.default.createElement(_reactRouterDom.Route, {
+                        path: '/private',
+                        render: function render() {
+                            return isAuthenticated ? _react2.default.createElement(Private, null) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+                        }
+                    })
                 )
-            ),
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: Home }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/public', component: Public }),
-            _react2.default.createElement(_reactRouterDom.Route, {
-                path: '/private',
-                render: function render() {
-                    return isAuthenticated ? _react2.default.createElement(Private, null) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
-                }
-            })
-        )
-    );
-};
+            );
+        }
+    }]);
+
+    return App;
+}(_react.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root') // eslint-disable-line
 );
@@ -25430,6 +25464,35 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 228 */,
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var dangNhap = function dangNhap(username, password) {
+    return fetch('http://localhost:3000/dangnhap', { // eslint-disable-line
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+    }).then(function (res) {
+        return res.text();
+    }).then(function (text) {
+        if (text === 'DANG_NHAP_THANH_CONG') return true;
+        return false;
+    });
+};
+
+exports.default = dangNhap;
 
 /***/ })
 /******/ ]);
