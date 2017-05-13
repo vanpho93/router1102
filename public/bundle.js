@@ -9532,11 +9532,9 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(215);
 
-var _Product = __webpack_require__(228);
-
-var _Product2 = _interopRequireDefault(_Product);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var isAuthenticated = false;
 
 var Home = function Home() {
     return _react2.default.createElement(
@@ -9545,11 +9543,18 @@ var Home = function Home() {
         'Home component'
     );
 };
-var Contact = function Contact() {
+var Private = function Private() {
     return _react2.default.createElement(
         'h2',
         null,
-        'Contact component'
+        'Private page'
+    );
+};
+var Public = function Public() {
+    return _react2.default.createElement(
+        'h2',
+        null,
+        'Public page'
     );
 };
 
@@ -9577,8 +9582,8 @@ var App = function App() {
                     null,
                     _react2.default.createElement(
                         _reactRouterDom.Link,
-                        { to: '/contact' },
-                        'Contact'
+                        { to: '/private' },
+                        'Private'
                     )
                 ),
                 _react2.default.createElement(
@@ -9586,32 +9591,19 @@ var App = function App() {
                     null,
                     _react2.default.createElement(
                         _reactRouterDom.Link,
-                        { to: '/product/skirt' },
-                        'SKIRT'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/product/dress' },
-                        'DRESS'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/product/hat' },
-                        'HAT'
+                        { to: '/public' },
+                        'Public'
                     )
                 )
             ),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: Home }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/contact', component: Contact }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/product/:name', component: _Product2.default })
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/public', component: Public }),
+            _react2.default.createElement(_reactRouterDom.Route, {
+                path: '/private',
+                render: function render() {
+                    return isAuthenticated ? _react2.default.createElement(Private, null) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+                }
+            })
         )
     );
 };
@@ -25433,60 +25425,6 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
-
-/***/ }),
-/* 228 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(186);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Product = function (_Component) {
-    _inherits(Product, _Component);
-
-    function Product() {
-        _classCallCheck(this, Product);
-
-        return _possibleConstructorReturn(this, (Product.__proto__ || Object.getPrototypeOf(Product)).apply(this, arguments));
-    }
-
-    _createClass(Product, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    this.props.match.params.name
-                )
-            );
-        }
-    }]);
-
-    return Product;
-}(_react.Component);
-
-exports.default = Product;
 
 /***/ })
 /******/ ]);
