@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Link, Redirect } from 'react-router-dom';
 import dangNhap from './api/dangNhap';
+import SignIn from './SignIn';
 
 const isAuthenticated = false;
 
@@ -28,9 +29,11 @@ class App extends Component {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/private">Private</Link></li>
                         <li><Link to="/public">Public</Link></li>
+                        <li><Link to="/signin">Sign In</Link></li>
                     </ul>
                     <Route exact path="/" component={Home} />
                     <Route path="/public" component={Public} />
+                    <Route path="/signin" component={SignIn} />
                     <Route
                         path="/private"
                         render={() => (isAuthenticated ? <Private /> : <Redirect to="/" />)}

@@ -9538,6 +9538,10 @@ var _dangNhap = __webpack_require__(229);
 
 var _dangNhap2 = _interopRequireDefault(_dangNhap);
 
+var _SignIn = __webpack_require__(230);
+
+var _SignIn2 = _interopRequireDefault(_SignIn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9629,10 +9633,20 @@ var App = function (_Component) {
                                 { to: '/public' },
                                 'Public'
                             )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/signin' },
+                                'Sign In'
+                            )
                         )
                     ),
                     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: Home }),
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/public', component: Public }),
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/signin', component: _SignIn2.default }),
                     _react2.default.createElement(_reactRouterDom.Route, {
                         path: '/private',
                         render: function render() {
@@ -25493,6 +25507,13 @@ var dangNhap = function dangNhap(username, password) {
 };
 
 exports.default = dangNhap;
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /***/ })
 /******/ ]);
