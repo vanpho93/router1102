@@ -1,12 +1,12 @@
 const express = require('express');
 const session = require('express-session');
-const jsonParser = require('body-parser').json();
+const parser = require('body-parser').urlencoded({ extended: false });
 
 const app = express();
 app.use(session({ 
     secret: 'keyboard cat', 
     cookie: { maxAge: 60000 },
-    resave: false,
+    resave: true,
     saveUninitialized: true
 }));
 app.listen(3000, () => console.log('Server started'));
@@ -22,7 +22,7 @@ app.get('/check', (req, res) => {
 
 app.get('*', (req, res) => res.render('home'));
 
-app.post('/dangnhap', jsonParser, (req, res) => {
+app.post('/dangnhap', parser, (req, res) => {
     const { username, password } = req.body;
     if (username === 'pho' && password === '123') {
         req.session.daDangNhap = true; // eslint-disable-line

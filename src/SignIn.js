@@ -5,8 +5,10 @@ export default class SignIn extends Component {
     onSubmit(e) {
         e.preventDefault();
         const { txtPassword, txtUsername } = this.refs;
-        dangNhap(txtUsername.value, txtPassword.value)
-        .then(isOk => console.log(isOk));
+        dangNhap(txtUsername.value, txtPassword.value, err => {
+            if (err) return console.log('KHONG THANH CONG');
+            console.log('THANH CONG');
+        });
     }
 
     render() {

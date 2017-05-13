@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Link, Redirect } from 'react-router-dom';
-import dangNhap from './api/dangNhap';
+import check from './api/check';
 import SignIn from './SignIn';
 
 const isAuthenticated = false;
@@ -17,8 +17,10 @@ const Public = () => <h2>Public page</h2>;
 
 class App extends Component {
     componentDidMount() {
-        dangNhap('pho', '123asdfad')
-        .then(isOk => console.log(isOk));
+        check(err => {
+            if (err) return console.log('KHONG THANH CONG');
+            console.log('THANH CONG');
+        });
     }
 
     render() {
